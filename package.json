@@ -1,0 +1,27 @@
+{
+  "name": "integration-hub",
+  "version": "1.0.0",
+  "description": "a nodejs app to do API composition for microservices",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jumkid/integration-hub.git"
+  },
+  "keywords": [
+    "Jumkid",
+    "Cloud"
+  ],
+  "author": "Chooli Yip",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jumkid/integration-hub/issues"
+  },
+  "homepage": "https://github.com/jumkid/integration-hub#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
