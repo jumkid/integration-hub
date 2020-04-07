@@ -1,0 +1,7 @@
+{
+  "ssl_enabled": true,
+  "ssl_port": 8443,
+
+  "none_ssl_enabled": true,
+  "none_ssl_port": 8080
+}
