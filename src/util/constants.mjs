@@ -1,17 +1,6 @@
 const C = {
-    /**
-     * Disabled header
-     * @type {string}
-     * @private
-     */
     X_POWERED_BY: 'x-powered-by',
-
-    /**
-     * Header that reflects the active version of the service
-     * Used by the health check
-     * @type {string}
-     * @private
-     */
+    // Header that reflects the active version of the service
     X_SERVICE_VERSION_HEADER: 'X-TFS-Service-Version',
 
     MIME_APP_URLENCODED: 'application/x-www-form-urlencoded',

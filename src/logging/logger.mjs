@@ -1,7 +1,7 @@
 import Conf from '../config/server-conf.mjs';
 import winston from 'winston';
 
-const Logger = new winston.createLogger({
+const logger = new winston.createLogger({
 
     transports: [
 
@@ -28,4 +28,4 @@ const Logger = new winston.createLogger({
 
 });
 
-export default Logger;
+export default logger;

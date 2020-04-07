@@ -8,10 +8,10 @@ import path from 'path';
  * @return {string} The application version
  */
 function readVersion() {
-    const manifestPath = path.resolve(__dirname + '/../../package.json');
-    const manifest = require(manifestPath);
+    const manifestPath = path.resolve( './package-lock.json');
+    const manifest = JSON.parse(fs.readFileSync(manifestPath));
     return manifest.version;
-};
+}
 
 const HealthCheckController = (req, res, next) => {
     if (Conf.heartbeat.enabled) {
