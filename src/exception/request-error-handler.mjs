@@ -1,13 +1,15 @@
 import Logger from '../logging/logger.mjs';
 import CommonErrorResponse from "./common-error-response.mjs";
 
-const RequestErrorHandler = (error, req, res) => {
+const RequestErrorHandler = (message, res, next) => {
 
-    Logger.error("catch request exception", error.stack);
+    Logger.error("catch request exception", message.stack);
 
-    new CommonErrorResponse(false, error.code, error.message, error.total)
-        .write(res);
-
+    if (message.statusCode) {
+        new CommonErrorResponse(false, message.statusCode, message.statusMessage, message.total)
+            .write(res);
+    }
+    next();
 };
 
 export default RequestErrorHandler;

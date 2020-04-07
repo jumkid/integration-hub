@@ -1,6 +1,6 @@
 import Conf from "../config/server-conf.mjs";
 import fs from "fs";
-import * as C from "../util/constants.mjs";
+import C from "../util/constants.mjs";
 import path from 'path';
 
 /**
@@ -13,7 +13,7 @@ function readVersion() {
     return manifest.version;
 };
 
-const HealthCheckController = (req, res) => {
+const HealthCheckController = (req, res, next) => {
     if (Conf.heartbeat.enabled) {
         fs.stat(Conf.heartbeat.filePath, function (err, stats){
             if (err) {
@@ -26,7 +26,7 @@ const HealthCheckController = (req, res) => {
                     .end('OK');
             }
         })
-    }else{
+    } else {
         res.set('Content-Type', 'text/plain').end('Heartbeat is disabled');
     }
 };

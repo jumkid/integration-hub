@@ -1,4 +1,4 @@
-export default {
+const C = {
     /**
      * Disabled header
      * @type {string}
@@ -22,3 +22,5 @@ export default {
     DEFAULT_END_TIME: "23:59:59"
 
 };
+
+export default C;

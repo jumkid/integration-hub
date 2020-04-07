@@ -24,6 +24,8 @@ lib-cov
 *.iml
 *.ipr
 
+dist/
+
 # Coverage directory used by tools like istanbul
 coverage
 *.lcov

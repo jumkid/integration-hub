@@ -1,5 +1,5 @@
 export default {
-    sslEnabled: true,
+    sslEnabled: false,
     sslPort: 8443,
 
     noneSslEnabled: true,
@@ -11,5 +11,14 @@ export default {
     heartbeat:{
         enabled: true,
         filePath: "./src/util/heartbeat.txt"
+    },
+
+    keyFilePath: {
+        value: "./credential/key.pem"
+    },
+
+    certFilePath: {
+        value: "./credential/cert.pem"
     }
+
 }
