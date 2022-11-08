@@ -1,2 +1,2 @@
 # integration-hub
-a nodejs app for microservices API composition
+a nodejs _app for microservices API composition

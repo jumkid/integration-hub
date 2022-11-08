@@ -1,10 +1,10 @@
-import logger from '../logging/logger.mjs';
+import logger from '../logging/logger.ts';
 import CommonErrorResponse from "./common-error-response.mjs";
 
-const RequestErrorHandler = (message, res, next) => {
-    if (message.statusCode) {
-        logger.error("catch request exception", message.stack);
-        new CommonErrorResponse(false, message.statusCode, message.statusMessage, message.total)
+const RequestErrorHandler = (req, res, next) => {
+    if (req.statusCode) {
+        logger.error("catch request exception", req.stack);
+        new CommonErrorResponse(false, req.statusCode, req.statusMessage, req.total)
             .write(res);
     }
     next();
