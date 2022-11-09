@@ -7,7 +7,7 @@ import vehicleVinController from './controller/VehicleVinController';
 
 const setRouters = (router:Router) => {
     router.get('/health', healthCheckController);
-    router.get('/vehicle/vin/decode/:vin', vehicleVinController.getInfoByVin);
+    router.get('/vehicle/vin/decode/:vin', vehicleVinController.vinDecode);
 };
 
 const App = {

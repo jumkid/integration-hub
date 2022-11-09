@@ -8,6 +8,8 @@ export interface VehicleResponse {
   model:string
   modelYear:number
   trimLevel:string
+  numberOfCylinders:number
+  drivetrain:string
 }
 
 export interface VPICResultResponse {
