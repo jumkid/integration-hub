@@ -7,8 +7,8 @@ const writeJson = (res:any, vehicleResponse:VehicleResponse) => {
         model: vehicleResponse.model,
         modelYear: vehicleResponse.modelYear,
         trimLevel: vehicleResponse.trimLevel,
-        numberOfCylinders: vehicleResponse.numberOfCylinders,
-        drivetrain: vehicleResponse.drivetrain
+        'vehicleEngine.cylinder': vehicleResponse.numberOfCylinders,
+        'vehicleTransmission.drivetrain': vehicleResponse.drivetrain
     });
 };
 

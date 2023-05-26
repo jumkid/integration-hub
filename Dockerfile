@@ -1,3 +1,9 @@
+# build process
+FROM node:18
+RUN yarn
+RUN yarn build
+
+# production environment
 FROM node:18
 ARG env
 
