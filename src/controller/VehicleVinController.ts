@@ -1,15 +1,8 @@
-import { VehicleResponse } from '../service/model/Response';
 import vehicleInfoService from '../service/VehicleInfoService';
+import { VehicleProfile } from '../service/model/VehicleProfile';
 
-const writeJson = (res:any, vehicleResponse:VehicleResponse) => {
-    res.json({
-        make: vehicleResponse.make,
-        model: vehicleResponse.model,
-        modelYear: vehicleResponse.modelYear,
-        trimLevel: vehicleResponse.trimLevel,
-        'vehicleEngine.cylinder': vehicleResponse.numberOfCylinders,
-        'vehicleTransmission.drivetrain': vehicleResponse.drivetrain
-    });
+const writeJson = (res:any, vehicleResponse:VehicleProfile) => {
+    res.json(vehicleResponse);
 };
 
 const ActivityController = {

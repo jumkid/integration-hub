@@ -3,15 +3,6 @@ export interface APIResponse {
   data: any | null
 }
 
-export interface VehicleResponse {
-  make:string
-  model:string
-  modelYear:number
-  trimLevel:string
-  numberOfCylinders:number
-  drivetrain:string
-}
-
 export interface VPICResultResponse {
   Value:string
   ValueId:string

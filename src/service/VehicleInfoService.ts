@@ -1,38 +1,50 @@
-import { VehicleResponse, VPICResultResponse } from './model/Response';
+import { VPICResultResponse } from './model/Response';
 import restfulClient from './RestfulClient';
 import * as _ from 'lodash';
 import logger from '../logging/logger';
+import { VehicleProfileMapping, VehicleEngineMapping, VehicleTransmissionMapping } from './VehicleFieldMappings';
+import { blankVehicleProfile, VehicleProfile } from './model/VehicleProfile';
 
 interface IVehicleInfoService {
-  getInfoByVin(vin:string):Promise<VehicleResponse>
+  getInfoByVin(vin:string):Promise<VehicleProfile>
 }
 
 class VehicleInfoService implements IVehicleInfoService {
 
-  async getInfoByVin (vin: string): Promise<VehicleResponse> {
+  async getInfoByVin (vin: string): Promise<VehicleProfile> {
     const url = process.env.VIN_DECODE_API;
 
-    const vehicleResponse:VehicleResponse = {
-      make: 'N/A',
-      model: 'N/A',
-      modelYear: 1900,
-      trimLevel: 'N/A',
-      numberOfCylinders: 0,
-      drivetrain: 'N/A'
-    };
+    const vehicleResponse:VehicleProfile = blankVehicleProfile;
 
     const response = await restfulClient.getWithPromise(`${url}/${vin}?format=json`);
     if (response.status === 200) {
       response.data.Results.map((result:VPICResultResponse)=>{
-        const variable = result.Variable.toLowerCase();
+        const variableId = result.VariableId;
         const value = result.Value;
-        if(variable === "make") vehicleResponse.make = value;
-        else if (variable === "model" && !_.isNull(value)) vehicleResponse.model = value;
-        else if (variable === "model year" && !_.isNull(value)) vehicleResponse.modelYear = Number(value);
-        else if (variable === "series" && !_.isNull(value)) vehicleResponse.trimLevel = value;
-        else if (variable === "trim" && !_.isNull(value)) vehicleResponse.trimLevel = value;
-        else if (variable === "engine number of cylinders" && !_.isNull(value)) vehicleResponse.numberOfCylinders = Number(value);
-        else if (variable === "drive type" && !_.isNull(value)) vehicleResponse.drivetrain = value;
+        if (VehicleProfileMapping.has(variableId)) {
+          const propName = VehicleProfileMapping.get(variableId);
+          if (!_.isNil(propName) && vehicleResponse.hasOwnProperty(propName)) {
+            // @ts-ignore
+            vehicleResponse[propName] = value;
+          }
+        }
+
+        if (VehicleEngineMapping.has(variableId)) {
+          const propName = VehicleEngineMapping.get(variableId);
+          if (!_.isNil(propName) && vehicleResponse.vehicleEngine.hasOwnProperty(propName)) {
+            // @ts-ignore
+            vehicleResponse.vehicleEngine[propName] = value;
+          }
+        }
+
+        if (VehicleTransmissionMapping.has(variableId)) {
+          const propName = VehicleTransmissionMapping.get(variableId);
+          if (!_.isNil(propName) && vehicleResponse.vehicleTransmission.hasOwnProperty(propName)) {
+            // @ts-ignore
+            vehicleResponse.vehicleTransmission[propName] = value;
+          }
+        }
+
       });
 
       logger.debug("get vehicle response {}", vehicleResponse);
